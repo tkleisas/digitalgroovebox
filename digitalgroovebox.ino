@@ -53,7 +53,7 @@ uint8_t rv2 = 0;
 uint8_t state = STATE_STOP;
 
 int interval;
-const unsigned char wavnames[6][3]=
+const unsigned char PROGMEM wavnames[6][3]=
 {
   {'S','I','N'},
   {'T','R','I'},
@@ -63,128 +63,26 @@ const unsigned char wavnames[6][3]=
   {'N','Z','E'}
   
 };
-unsigned char durwav[8][4][16] =
-{
-  {
-    {128 | SQUARE,128 | SQUARE,128 | SQUARE,128 | SQUARE,128 | SQUARE,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW},
-    {128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW},
-    {128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW},
-    {128 | NOISE,128 | NOISE,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW},
-    
-  },
-    {
-    {128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW},
-    {128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW},
-    {128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW},
-    {128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW},
-    
-  },
-  {
-    {128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW},
-    {128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW},
-    {128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW},
-    {128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW},
-    
-  },
-  {
-    {128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW},
-    {128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW},
-    {128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW},
-    {128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW},
-    
-  },
-  {
-     {128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW},
-    {128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW},
-    {128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW},
-    {128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW},
-   
-  },
-  {
-    {128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW},
-    {128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW},
-    {128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW},
-    {128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW},
-    
-  },
-  {
-    {128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW},
-    {128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW},
-    {128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW},
-    {128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW},
-    
-  },
-  {
-    {128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW},
-    {128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW},
-    {128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW},
-    {128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW,128 | SAW},
-    
-  }
 
- 
-};
-typedef struct voiceParams
-{
-  char wave;
-  char duration;
-  char note;
-  char envelope;
-  char mod;
-}; 
-voiceParams currVoiceParams[4];
+/*char paridx = 0*/
 
-char note[8][4][16] = 
+typedef struct seqstep
 {
-  {
-    {0,-1,2,-1,4,-1,6,-1,8,-1,10,-1,12,-1,14,-1},
-    {0,0,-1,-1,12,12,-1,24,27,-1,33,-1,44,44,55,55},
-    {-1,-1,-1,-1,36,4,67,68,32,-1,-1,-1,-1,4,67,68},
-    {0,-1,-1,-1,16,-1,-1,-1,0,-1,0,-1,16,-1,-1,-1}
-  },
-  {
-    {0,-1,2,-1,4,-1,6,-1,8,-1,10,-1,12,-1,14,-1},
-    {0,0,-1,-1,12,12,-1,24,27,-1,33,-1,44,44,55,55},
-    {-1,-1,-1,-1,36,4,67,68,32,-1,-1,-1,-1,4,67,68},
-    {0,-1,-1,-1,16,-1,-1,-1,0,-1,0,-1,16,-1,-1,-1}
-  },
-{
-    {0,-1,2,-1,4,-1,6,-1,8,-1,10,-1,12,-1,14,-1},
-    {0,0,-1,-1,12,12,-1,24,27,-1,33,-1,44,44,55,55},
-    {-1,-1,-1,-1,36,4,67,68,32,-1,-1,-1,-1,4,67,68},
-    {0,-1,-1,-1,16,-1,-1,-1,0,-1,0,-1,16,-1,-1,-1}
-  },
-{
-    {0,-1,2,-1,4,-1,6,-1,8,-1,10,-1,12,-1,14,-1},
-    {0,0,-1,-1,12,12,-1,24,27,-1,33,-1,44,44,55,55},
-    {-1,-1,-1,-1,36,4,67,68,32,-1,-1,-1,-1,4,67,68},
-    {0,-1,-1,-1,16,-1,-1,-1,0,-1,0,-1,16,-1,-1,-1}
-  },
-{
-    {0,-1,2,-1,4,-1,6,-1,8,-1,10,-1,12,-1,14,-1},
-    {0,0,-1,-1,12,12,-1,24,27,-1,33,-1,44,44,55,55},
-    {-1,-1,-1,-1,36,4,67,68,32,-1,-1,-1,-1,4,67,68},
-    {0,-1,-1,-1,16,-1,-1,-1,0,-1,0,-1,16,-1,-1,-1}
-  },
-{
-    {0,-1,2,-1,4,-1,6,-1,8,-1,10,-1,12,-1,14,-1},
-    {0,0,-1,-1,12,12,-1,24,27,-1,33,-1,44,44,55,55},
-    {-1,-1,-1,-1,36,4,67,68,32,-1,-1,-1,-1,4,67,68},
-    {0,-1,-1,-1,16,-1,-1,-1,0,-1,0,-1,16,-1,-1,-1}
-  },
-{
-    {0,-1,2,-1,4,-1,6,-1,8,-1,10,-1,12,-1,14,-1},
-    {0,0,-1,-1,12,12,-1,24,27,-1,33,-1,44,44,55,55},
-    {-1,-1,-1,-1,36,4,67,68,32,-1,-1,-1,-1,4,67,68},
-    {0,-1,-1,-1,16,-1,-1,-1,0,-1,0,-1,16,-1,-1,-1}
-  },
-{
-    {0,-1,2,-1,4,-1,6,-1,8,-1,10,-1,12,-1,14,-1},
-    {0,0,-1,-1,12,12,-1,24,27,-1,33,-1,44,44,55,55},
-    {-1,-1,-1,-1,36,4,67,68,32,-1,-1,-1,-1,4,67,68},
-    {0,-1,-1,-1,16,-1,-1,-1,0,-1,0,-1,16,-1,-1,-1}
-  }  
+  uint8_t note;
+  uint8_t duration;
+  uint8_t envwav;
+  
+  uint8_t mod;
 };
+
+seqstep sequencer[4][16][4];
+
+
+
+
+seqstep currVoiceParams[4];
+
+
 
 /*
 char pattrn1[16] = {0,-1,2,-1,4,-1,6,-1,8,-1,10,-1,12,-1,14,-1};
@@ -192,6 +90,26 @@ char pattrn2[16] = {0,0,-1,-1,12,12,-1,24,27,-1,33,-1,44,44,55,55};
 char pattrn3[16] = {-1,-1,-1,-1,36,4,67,68,32,-1,-1,-1,-1,4,67,68};
 char pattrn4[16] = {0,-1,-1,-1,16,-1,-1,-1,0,-1,0,-1,16,-1,-1,-1};
 */
+
+void initPatterns()
+{
+  
+  for( int p = 0; p<4;p++) // pattern (0-3)
+  {
+    for (int s = 0; s<16;s++) //pattern step (0-15)
+    {
+      for (int v = 0; v<4; v++) // voice (0-3)
+      {
+            sequencer[p][s][v].note = 3*s;
+            sequencer[p][s][v].envwav = ((v<<6)& B11000000) | ((s % 6) &B00111111);
+            sequencer[p][s][v].mod = 64;
+
+            sequencer[p][s][v].duration = s*16;
+      } 
+    }
+  }
+}
+
 void setup() {
 
 
@@ -207,28 +125,28 @@ display.begin(SSD1306_SWITCHCAPVCC);
   //setupVoice( voice[0-3] , waveform[SINE,TRIANGLE,SQUARE,SAW,RAMP,NOISE] , pitch[0-127], envelope[ENVELOPE0-ENVELOPE3], length[0-127], mod[0-127, 64=no mod])
   
   edgar.setupVoice(0,SINE,60,ENVELOPE1,60,64);
-  currVoiceParams[0].wave = SINE;
+  currVoiceParams[0].envwav = ENVELOPE1<<6 | SINE;
   currVoiceParams[0].duration = 64;
   currVoiceParams[0].note = 18;
-  currVoiceParams[0].envelope = ENVELOPE1;
+  
   currVoiceParams[0].mod = 64;
   edgar.setupVoice(1,RAMP,0,ENVELOPE3,64,64);
-  currVoiceParams[1].wave = RAMP;
+  currVoiceParams[1].envwav = ENVELOPE3<<6 | RAMP;
   currVoiceParams[1].duration = 64;
   currVoiceParams[1].note = 36;
-  currVoiceParams[1].envelope = ENVELOPE3;
+  
   currVoiceParams[1].mod = 64;
   edgar.setupVoice(2,TRIANGLE,0,ENVELOPE2 ,70,64);
-  currVoiceParams[2].wave = TRIANGLE;
+  currVoiceParams[2].envwav = ENVELOPE2 << 6 | TRIANGLE;
   currVoiceParams[2].duration = 64;
   currVoiceParams[2].note = 67;
-  currVoiceParams[2].envelope = ENVELOPE2;
+  
   currVoiceParams[2].mod = 64;
   edgar.setupVoice(3,NOISE,0,ENVELOPE3,20,64);
-  currVoiceParams[3].wave = NOISE;
+  currVoiceParams[3].envwav = ENVELOPE3 << 6| NOISE;
   currVoiceParams[3].duration = 64;
   currVoiceParams[3].note = 68;
-  currVoiceParams[3].envelope = ENVELOPE3;
+  
   currVoiceParams[3].mod = 64;
   
   pinMode(A0, INPUT);
@@ -253,7 +171,8 @@ display.begin(SSD1306_SWITCHCAPVCC);
   pciSetup(A3);
   
   encv2 = bpm;
-  state = STATE_STOP;  
+  state = STATE_STOP;
+  initPatterns();  
 }
 ISR (PCINT1_vect) // handle pin change interrupt for A0 to A5 here
 {
@@ -365,11 +284,11 @@ void loop()
       display.charbuffer[1]= CHAR_PLAY;
       if(prev_btn1 == HIGH)
       {
-        edgar.setWave(0,currVoiceParams[0].wave);
+        edgar.setWave(0,currVoiceParams[0].envwav & B00111111);
             //edgar.setPitch(v,note[currpattern][v][pindex]);
         edgar.setLength(0,currVoiceParams[0].duration);
         
-        edgar.setEnvelope(0,currVoiceParams[0].envelope);
+        edgar.setEnvelope(0,(currVoiceParams[0].envwav & B11000000)>>6);
         edgar.setMod(0,currVoiceParams[0].mod);
         edgar.mTrigger(0,currVoiceParams[0].note);
       }
@@ -384,11 +303,11 @@ void loop()
       display.charbuffer[1+16]=CHAR_PLAY;
       if(prev_btn2 == HIGH)
       {
-        edgar.setWave(1,currVoiceParams[1].wave);
+        edgar.setWave(1,currVoiceParams[1].envwav & B00111111);
             //edgar.setPitch(v,note[currpattern][v][pindex]);
         edgar.setLength(1,currVoiceParams[1].duration);
         
-        edgar.setEnvelope(1,currVoiceParams[1].envelope);
+        edgar.setEnvelope(1,(currVoiceParams[1].envwav & B11000000)>>6);
         edgar.setMod(1,currVoiceParams[1].mod);
 
         edgar.mTrigger(1,currVoiceParams[1].note);
@@ -403,11 +322,11 @@ void loop()
       display.charbuffer[1+32]=CHAR_PLAY;
       if(prev_btn3==HIGH)
       {
-        edgar.setWave(2,currVoiceParams[2].wave);
+        edgar.setWave(2,currVoiceParams[2].envwav & B00111111);
             //edgar.setPitch(v,note[currpattern][v][pindex]);
         edgar.setLength(2,currVoiceParams[2].duration);
         
-        edgar.setEnvelope(2,currVoiceParams[2].envelope);
+        edgar.setEnvelope(2,(currVoiceParams[2].envwav & B11000000)>>6);
         edgar.setMod(2,currVoiceParams[2].mod);
 
         
@@ -424,11 +343,11 @@ void loop()
       display.charbuffer[1+48] = CHAR_PLAY;
       if(prev_btn4==HIGH)
       {
-        edgar.setWave(3,currVoiceParams[3].wave);
+        edgar.setWave(3,currVoiceParams[3].envwav & B00111111);
             //edgar.setPitch(v,note[currpattern][v][pindex]);
         edgar.setLength(3,currVoiceParams[3].duration);
         
-        edgar.setEnvelope(3,currVoiceParams[3].envelope);
+        edgar.setEnvelope(3,(currVoiceParams[3].envwav & B11000000)>>6);
         edgar.setMod(3,currVoiceParams[3].mod);
 
         
@@ -448,35 +367,64 @@ void loop()
           display.charbuffer[64+pindex] = 0x1f;
           for(uint8_t v= 0;v<4;v++)
           { 
-            if(note[currpattern][v][pindex]!=-1)
+            if(sequencer[currpattern][pindex][v].note!=255)
             {
-            display.charbuffer[(v<<4) + 1] = 27;
-            nbuf = num2screen(note[currpattern][v][pindex]);
-            display.charbuffer[(v<<4) + 2] = nbuf[0];
-            display.charbuffer[(v<<4) + 3] = nbuf[1];
-            display.charbuffer[(v<<4) + 4] = nbuf[2];
-            display.charbuffer[(v<<4) + 5] = ' ';
-            display.charbuffer[(v<<4) + 6] = wavnames[durwav[currpattern][v][pindex] & 0x7][0];
-            display.charbuffer[(v<<4) + 7] = wavnames[durwav[currpattern][v][pindex] & 0x7][1];
-            display.charbuffer[(v<<4) + 8] = wavnames[durwav[currpattern][v][pindex] & 0x7][2];
             
-            edgar.setWave(v,durwav[currpattern][v][pindex] & 0x7);
+            nbuf = num2screen(sequencer[currpattern][pindex][v].note);
+            display.charbuffer[(v<<4) + 0] = nbuf[0];
+            display.charbuffer[(v<<4) + 1] = nbuf[1];
+            display.charbuffer[(v<<4) + 2] = nbuf[2];
+            display.charbuffer[(v<<4) + 3] = ' ';
+            nbuf = num2screen(sequencer[currpattern][pindex][v].duration);
+            display.charbuffer[(v<<4) + 4] = nbuf[0];
+            display.charbuffer[(v<<4) + 5] = nbuf[1];
+            display.charbuffer[(v<<4) + 6] = nbuf[2];
+            display.charbuffer[(v<<4) + 7] = ' ';
+            nbuf = num2screen(sequencer[currpattern][pindex][v].envwav & B00111111);
+            display.charbuffer[(v<<4) + 8] = nbuf[1];
+            display.charbuffer[(v<<4) + 9] = nbuf[2];
+            
+            display.charbuffer[(v<<4) + 10] = ' ';
+            nbuf = num2screen((sequencer[currpattern][pindex][v].envwav & B11000000) >> 6);
+            display.charbuffer[(v<<4) + 11] = nbuf[2];
+            display.charbuffer[(v<<4) + 12] = ' ';
+            
+            nbuf = num2screen(sequencer[currpattern][pindex][v].mod);
+            display.charbuffer[(v<<4) + 13] = nbuf[0];
+            display.charbuffer[(v<<4) + 14] = nbuf[1];
+            display.charbuffer[(v<<4) + 15] = nbuf[2];
+            
+            /*
+            display.charbuffer[(v<<4) + 6] = wavnames[sequencer[currpattern][pindex][v].envwav & B00111111 ][0];
+            display.charbuffer[(v<<4) + 7] = wavnames[sequencer[currpattern][pindex][v].envwav & B00111111 ][1];
+            display.charbuffer[(v<<4) + 8] = wavnames[sequencer[currpattern][pindex][v].envwav & B00111111 ][2];
+            */
+            
+            edgar.setWave(v,sequencer[currpattern][pindex][v].envwav & B00111111 );
             //edgar.setPitch(v,note[currpattern][v][pindex]);
-            edgar.setLength(v,64/*(durwav[currpattern][pindex][v] & 0xf0)*/);
-            edgar.setEnvelope(v,ENVELOPE0);
-            edgar.mTrigger(v,(note[currpattern][v][pindex]+encv1)%128);
+            edgar.setLength(v,sequencer[currpattern][pindex][v].duration/*(durwav[currpattern][pindex][v] & 0xf0)*/);
+            edgar.setEnvelope(v,(sequencer[currpattern][pindex][v].envwav & B11000000)>>6);
+            edgar.mTrigger(v,sequencer[currpattern][pindex][v].note);
             
             }
             else
             {
-              display.charbuffer[(v<<4) +1] = ' ';
-              display.charbuffer[(v<<4) +2] = ' ';
-              display.charbuffer[(v<<4)+3] = '-';
+              display.charbuffer[(v<<4)+0] = '-';
+              display.charbuffer[(v<<4)+1] = '-';
+              display.charbuffer[(v<<4)+2] = '-';
+              display.charbuffer[(v<<4)+3] = ' ';
               display.charbuffer[(v<<4)+4] = '-';
-              display.charbuffer[(v<<4) +5] = ' ';
-              display.charbuffer[(v<<4) +6] = '-';
-              display.charbuffer[(v<<4)+7] = '-';
+              display.charbuffer[(v<<4)+5] = '-';
+              display.charbuffer[(v<<4)+6] = '-';
+              display.charbuffer[(v<<4)+7] = ' ';
               display.charbuffer[(v<<4)+8] = '-';
+              display.charbuffer[(v<<4)+9] = '-';
+              display.charbuffer[(v<<4)+10] = ' ';
+              display.charbuffer[(v<<4)+11] = '-';
+              display.charbuffer[(v<<4)+12] = ' ';
+              display.charbuffer[(v<<4)+13] = '-';
+              display.charbuffer[(v<<4)+14] = '-';
+              display.charbuffer[(v<<4)+15] = '-';
               
             }
           }
@@ -499,13 +447,17 @@ void loop()
         {
           if(btnshft == LOW)
           {
-            note[currpattern][0][pindex] = -1;
+            sequencer [currpattern][pindex][0].note = 255;
+            
           }
           else
           {
+            sequencer[currpattern][pindex][0].note = currVoiceParams[0].note;
+            sequencer[currpattern][pindex][0].duration = currVoiceParams[0].duration;
+            sequencer[currpattern][pindex][0].mod = currVoiceParams[0].mod;
+            sequencer[currpattern][pindex][0].envwav = currVoiceParams[0].envwav;
             
-            note[currpattern][0][pindex] = currVoiceParams[0].note;
-            durwav[currpattern][0][pindex] = durwav[currpattern][0][pindex] | currVoiceParams[0].wave;
+            
           }
           
         }
@@ -513,38 +465,46 @@ void loop()
         {
           if(btnshft == LOW)
           {
-            note[currpattern][1][pindex] = -1;
+            sequencer [currpattern][pindex][1].note = 255;
           }
           else
           {
-            note[currpattern][1][pindex] = currVoiceParams[1].note;
-            durwav[currpattern][1][pindex] = durwav[currpattern][1][pindex] | currVoiceParams[1].wave; 
-
+            sequencer[currpattern][pindex][1].note = currVoiceParams[1].note;
+            sequencer[currpattern][pindex][1].duration = currVoiceParams[1].duration;
+            sequencer[currpattern][pindex][1].mod = currVoiceParams[1].mod;
+            sequencer[currpattern][pindex][1].envwav = currVoiceParams[1].envwav;
+            
           }
         }
         if(btn3==LOW && prev_btn3==HIGH)
         {
           if(btnshft == LOW)
           {
-            note[currpattern][2][pindex] = -1;
+            sequencer [currpattern][pindex][2].note = 255;
           }
           else
           {
-            note[currpattern][2][pindex] = currVoiceParams[2].note;
-            durwav[currpattern][2][pindex] = durwav[currpattern][2][pindex] | currVoiceParams[2].wave; 
+            sequencer[currpattern][pindex][2].note = currVoiceParams[2].note;
+            sequencer[currpattern][pindex][2].duration = currVoiceParams[2].duration;
+            sequencer[currpattern][pindex][2].mod = currVoiceParams[2].mod;
+            sequencer[currpattern][pindex][2].envwav = currVoiceParams[2].envwav;
+            
+
           }
         }
         if(btn4==LOW && prev_btn4==HIGH)
         {
           if(btnshft == LOW)
           {
-            note[currpattern][3][pindex] = -1;
+            sequencer [currpattern][pindex][3].note = 255;
           }
           else
           {
-            note[currpattern][3][pindex] = currVoiceParams[3].note;
-            durwav[currpattern][3][pindex] = durwav[currpattern][3][pindex] | currVoiceParams[3].wave; 
-
+            sequencer[currpattern][pindex][3].note = currVoiceParams[3].note;
+            sequencer[currpattern][pindex][3].duration = currVoiceParams[3].duration;
+            sequencer[currpattern][pindex][3].mod = currVoiceParams[3].mod;
+            sequencer[currpattern][pindex][3].envwav = currVoiceParams[3].envwav;
+            
           }
         }
       if((currtime-prevtime)>interval)
@@ -553,23 +513,23 @@ void loop()
         
         for(uint8_t v= 0;v<4;v++)
         { 
-          if(note[currpattern][v][pindex]!=-1)
+          if(sequencer[currpattern][pindex][v].note!=255)
           {
           display.charbuffer[(v<<4) + 1] = 27;
-          nbuf = num2screen(note[currpattern][v][pindex]);
+          nbuf = num2screen(sequencer[currpattern][pindex][v].note);
           display.charbuffer[(v<<4) + 2] = nbuf[0];
           display.charbuffer[(v<<4) + 3] = nbuf[1];
           display.charbuffer[(v<<4) + 4] = nbuf[2];
           display.charbuffer[(v<<4) + 5] = ' ';
-          display.charbuffer[(v<<4) + 6] = wavnames[durwav[currpattern][v][pindex] & 0x7][0];
-          display.charbuffer[(v<<4) + 7] = wavnames[durwav[currpattern][v][pindex] & 0x7][1];
-          display.charbuffer[(v<<4) + 8] = wavnames[durwav[currpattern][v][pindex] & 0x7][2];
+          display.charbuffer[(v<<4) + 6] = wavnames[sequencer[currpattern][pindex][v].envwav & B00111111][0];
+          display.charbuffer[(v<<4) + 7] = wavnames[sequencer[currpattern][pindex][v].envwav & B00111111][1];
+          display.charbuffer[(v<<4) + 8] = wavnames[sequencer[currpattern][pindex][v].envwav & B00111111][2];
           
-          edgar.setWave(v,durwav[currpattern][v][pindex] & 0x7);
+          edgar.setWave(v,sequencer[currpattern][pindex][v].envwav & B00111111);
           //edgar.setPitch(v,note[currpattern][v][pindex]);
-          edgar.setLength(v,64/*(durwav[currpattern][pindex][v] & 0xf0)*/);
-          edgar.setEnvelope(v,ENVELOPE0);
-          edgar.mTrigger(v,(note[currpattern][v][pindex]+encv1)%128);
+          edgar.setLength(v,sequencer[currpattern][pindex][v].duration);
+          edgar.setEnvelope(v,(sequencer[currpattern][pindex][v].envwav & B11000000)>>6);
+          edgar.mTrigger(v,sequencer[currpattern][pindex][v].note);
           
           }
           else

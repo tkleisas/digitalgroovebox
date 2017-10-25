@@ -1,4 +1,5 @@
 # digitalgroovebox
+![Groovebox breadboard image](groovebox_nano_2_bb.png)
 digitalgroovebox is an attempt to create a usable groovebox using an
 arduino uno, an OLED screen, 6 buttons and two rotary encoders. In order
 to do that, we build upon other projects, namely Mozzi, Adafruit_SSD1306
